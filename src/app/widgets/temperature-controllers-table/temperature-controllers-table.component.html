@@ -1,0 +1,70 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="temperatureDataSource">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td (click)="copy(row.id)" mat-cell *matCellDef="let row "> {{row.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="reportIntervalSeconds">
+      <th mat-header-cell *matHeaderCellDef> Report Interval (s.) </th>
+      <td mat-cell *matCellDef="let row "> {{row.reportIntervalSeconds}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="celsiusToStartAeration">
+      <th mat-header-cell *matHeaderCellDef> Aeration Start </th>
+      <td mat-cell *matCellDef="let row "> {{row.celsiusToStartAeration}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="celsiusToFinishAeration">
+      <th mat-header-cell *matHeaderCellDef> Aeration End </th>
+      <td mat-cell *matCellDef="let row "> {{row.celsiusToFinishAeration}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="celsiusToStartHeating">
+      <th mat-header-cell *matHeaderCellDef> Heating Start </th>
+      <td mat-cell *matCellDef="let row "> {{row.celsiusToStartHeating}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="celsiusToFinishHeating">
+      <th mat-header-cell *matHeaderCellDef> Heating End </th>
+      <td mat-cell *matCellDef="let row "> {{row.celsiusToFinishHeating}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bottomEdgeToAlert">
+      <th mat-header-cell *matHeaderCellDef> Bottom Alert </th>
+      <td mat-cell *matCellDef="let row "> {{row.bottomEdgeToAlert}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="upperEdgeToAlert">
+      <th mat-header-cell *matHeaderCellDef> Upper Alert </th>
+      <td mat-cell *matCellDef="let row "> {{row.upperEdgeToAlert}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell class="actions-header" *matHeaderCellDef ></th>
+      <td mat-cell *matCellDef="let row">
+        <button
+        (click)="remove(row.id)"
+        color="warn"
+        mat-flat-button
+        class="action-btn"
+        >
+          Delete
+        </button>
+        <button
+        (click)="edit(row.id)"
+        color="accent"
+        mat-flat-button
+        class="action-btn"
+        >
+          Edit
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="temperatureDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: temperatureDisplayedColumns"></tr>
+  </table>
+  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

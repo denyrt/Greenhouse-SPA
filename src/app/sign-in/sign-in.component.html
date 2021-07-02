@@ -1,0 +1,21 @@
+<div class="container">
+    <div *ngIf="waitResponse; else mainContent">
+        <div class="div-loader">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
+    <ng-template #mainContent>
+        <div *ngIf="this.loginMode; else registryMode">
+            <app-login
+            (createAccountEM)="switchMode()"
+            (submitEM)="login($event)">
+            </app-login>
+        </div>
+        <ng-template #registryMode>
+            <app-registry
+            (submitEM)="registry($event)"
+            (backToLoginEM)="switchMode()">
+            </app-registry>
+        </ng-template>
+    </ng-template>
+</div>

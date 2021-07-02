@@ -1,0 +1,43 @@
+<header>
+  <mat-toolbar color="primary" class="navbar">
+    <span>Greenhouse-SPA</span>
+    
+    <div style="width: 50px;">
+    </div>
+
+    <div *ngIf="isLoggedIn()">
+      <button routerLink="greenhouses" routerLinkActive="active" color="primary" mat-flat-button>
+          <mat-icon>table_view</mat-icon>
+          Greenhouses
+      </button>
+      <button routerLink="controllers" routerLinkActive="active" color="primary" mat-flat-button>
+        <mat-icon>speed</mat-icon>
+        Controllers
+    </button>
+    </div>
+    
+    <span class="example-spacer"></span>
+    <span class="flexExpand"></span>
+    
+    <div *ngIf="isLoggedIn(); else needLogin">
+      <button routerLink="account" routerLinkActive="active" color="primary" mat-flat-button>
+        <mat-icon>account_circle</mat-icon>
+        Account       
+      </button>
+      <button (click)="logout()" color="primary" mat-flat-button>
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+
+    <ng-template #needLogin>
+      <div>
+        <button routerLink="sign-in" routerLinkActive="active" color="primary" mat-flat-button>
+          <mat-icon>login</mat-icon>
+          Sign In
+        </button>
+      </div>
+    </ng-template>
+  
+  </mat-toolbar>
+</header>

@@ -1,0 +1,95 @@
+<form [formGroup]="form">
+  <h1 mat-dialog-title>{{dialogTitle}}</h1>
+  <div *ngIf="loading; else createForm">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #createForm>
+    <div mat-dialog-content>
+      <div>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+          required
+          type="text"
+          matInput
+          placeholder="Some Greenhouse"
+          formControlName="name">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Report Interval (Seconds)</mat-label>
+          <input
+          required
+          range
+          [minValue]="30"
+          type="number"
+          matInput
+          placeholder="Seconds (200)"
+          formControlName="reportIntervalSeconds">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Bottom Wet Edge</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="bottomWetEdge">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Upper Wet Edge</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="upperWetEdge">
+        </mat-form-field>
+      </div>
+
+    </div>  
+    <div *ngIf="form.touched && form.invalid" class="error">
+      <span *ngIf="f.name.touched && f.name.invalid">
+        Name is required.
+      </span>
+      <span *ngIf="f.reportIntervalSeconds.touched && f.reportIntervalSeconds.errors">
+        <span *ngIf="f.reportIntervalSeconds.errors.required">
+          Report Interval is required.
+        </span>
+        <span *ngIf="f.reportIntervalSeconds.errors.range">
+          Report Interval min value is {{f.reportIntervalSeconds.errors.data.minValue}}.
+        </span>
+      </span>
+      <span *ngIf="f.bottomWetEdge.touched && f.bottomWetEdge.errors">
+        <span *ngIf="f.bottomWetEdge.errors.required">
+          Bottom edge is required.
+        </span>
+      </span>
+      <span *ngIf="f.upperWetEdge.touched && f.upperWetEdge.errors">
+        <span *ngIf="f.upperWetEdge.errors.required">
+          Upper edge is required.
+        </span>
+      </span>
+    </div>
+    <mat-dialog-actions>
+      <button
+      (click)="cancel()"
+      cdkFocusInitial 
+      mat-flat-button 
+      color="warn"
+      >
+        {{cancelButtonLabel}}
+      </button>
+      <button
+      (click)="submit()"
+      cdkFocusInitial 
+      mat-flat-button
+      color="primary"
+      >
+        {{submitButtonLabel}}      
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+</form>

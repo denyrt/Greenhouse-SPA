@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+.action-btn {
+  margin: 3px;
+}
+
+.actions-header {
+  width: 250px;
+}

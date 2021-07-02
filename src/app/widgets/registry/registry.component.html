@@ -1,0 +1,109 @@
+<mat-card>
+  <mat-card-title>Create Account</mat-card-title>
+<mat-card-content>
+<form [formGroup]="form" (ngSubmit)="submit()">
+<p>
+  <mat-form-field>
+    <input type="text"
+    required 
+    minlength="3"
+    matInput 
+    placeholder="Username" 
+    formControlName="username">
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <input type="email"
+    required
+    email
+    matInput 
+    placeholder="Email"
+    formControlName="email">
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <input type="password"
+    required
+    minlength="8"
+    pattern="^.*(?=.*)(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_[\]{},.<>+=-]).*$"
+    matInput 
+    placeholder="Password"
+    formControlName="password">
+    <mat-icon matSuffix>vpn_key</mat-icon>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <input type="password"
+    required
+    pattern="{{form.value.password}}"
+    matInput 
+    placeholder="Confirm Password"
+    formControlName="confirmPassword">
+    <mat-icon matSuffix>vpn_key</mat-icon>
+  </mat-form-field>
+</p>
+
+<div *ngIf="form.touched && form.invalid">
+  <div class="error">
+    <span *ngIf="f.username.touched && f.username.errors">
+      <span *ngIf="f.username.errors.required">
+        Username is required.
+      </span>
+      <span *ngIf="f.username.errors.minlength">
+        Min lenght of username is 3.
+      </span>
+    </span>    
+  
+    <span *ngIf="f.email.touched && f.email.errors">
+      <span *ngIf="f.email.errors.required">
+        Email is required.  
+      </span>
+      <span *ngIf="f.email.errors.email">
+        Email has invalid format.
+      </span>
+    </span>  
+    
+    <span *ngIf="f.password.touched && f.password.errors">
+      <span *ngIf="f.password.errors.required">
+        Password is required.
+      </span>
+      <span *ngIf="f.password.errors.minlength">
+        Min lenght of password is 8.
+      </span>
+      <span *ngIf="f.password.errors.pattern">
+        Password must have at least 1 number, 1 uppercase letter and 1 special symbol.
+      </span>
+    </span> 
+
+    <span *ngIf="f.confirmPassword.touched && f.confirmPassword.errors">
+      <span *ngIf="f.confirmPassword.errors.pattern">
+        Passwords not equal.
+      </span>
+    </span>  
+  </div>
+</div>
+
+<p *ngIf="error" class="error">
+  {{ error }}
+</p>
+
+<div class="button">
+  <button type="button" (click)="backToLoginEM.emit()" mat-button>
+    Back to login
+  </button>
+  <button type="submit" mat-flat-button color="primary">
+    Registry
+  </button>
+</div>
+
+</form>
+</mat-card-content>
+</mat-card>

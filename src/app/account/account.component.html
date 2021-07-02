@@ -1,0 +1,128 @@
+<mat-accordion>
+  <mat-expansion-panel class="account-expand" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Аккаунт
+      </mat-panel-title>
+      <mat-icon>account_circle</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="row"></div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="temperature-expand">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Температура
+      </mat-panel-title>
+      <mat-panel-description>
+        Просмотр показателей температуры
+      </mat-panel-description>
+      <mat-icon class="red-icon">thermostat</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col chart-container">
+        <canvas
+          mdbChart
+          [chartType]="temperaturesChartType"
+          [datasets]="temperaturesDatasets"
+          [labels]="temperaturesChartLabels"
+          [colors]="temperaturesChartColors"
+          [options]="temperaturesChartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+          size="50"
+        >
+        </canvas>      
+      </div>
+  
+      <div class="col pt-5">
+        <app-reports-data-form
+        [greenhouses]="greenhouses"
+        [isLoading]="temperaturesIsLoading"
+        (loadButtonEM)="loadTemperatureChart($event)">
+        </app-reports-data-form>
+        <div class="pt-5" *ngIf="temperaturesIsLoading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="light-expand">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Освещение
+      </mat-panel-title>
+      <mat-panel-description>
+        Просмотр показателей освещения
+      </mat-panel-description>
+      <mat-icon class="green-icon">lightbulb</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col chart-container">
+        <canvas
+          mdbChart
+          [chartType]="lightsChartType"
+          [datasets]="lightsDatasets"
+          [labels]="lightsChartLabels"
+          [colors]="lightsChartColors"
+          [options]="lightsChartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+          size="50"
+        >
+        </canvas>      
+      </div>
+  
+      <div class="col pt-5">
+        <app-reports-data-form
+        [greenhouses]="greenhouses"
+        (loadButtonEM)="loadLightsChart($event)">
+        </app-reports-data-form>
+        <div *ngIf="lightsIsLoading" class="pt-5">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="wet-expand">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Влажность
+      </mat-panel-title>
+      <mat-panel-description>
+        Просмотр показателей влажности
+      </mat-panel-description>
+      <mat-icon class="purple-icon">opacity</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col chart-container">
+        <canvas
+          mdbChart
+          [chartType]="wetsChartType"
+          [datasets]="wetsDatasets"
+          [labels]="wetsChartLabels"
+          [colors]="wetsChartColors"
+          [options]="wetsChartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+        >
+        </canvas>      
+      </div>
+  
+      <div class="col pt-5">
+        <app-reports-data-form
+        [greenhouses]="greenhouses"
+        (loadButtonEM)="loadWetsChart($event)">
+        </app-reports-data-form>
+        <div *ngIf="wetsIsLoading" class="pt-5">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

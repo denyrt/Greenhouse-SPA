@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+  <h1 mat-dialog-title>Update Greenhouse</h1>
+  <div *ngIf="formDisabled; else createForm">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #createForm>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+        [readonly]="formDisabled"
+        required
+        type="text"
+        matInput
+        placeholder="Some Greenhouse"
+        formControlName="name">
+      </mat-form-field>
+    </div>  
+    <div>
+      <span *ngIf="f.name.touched && f.name.invalid">
+        Name is required.
+      </span>
+    </div>
+    <div mat-dialog-actions>
+      <button
+      [disabled]="formDisabled"
+      (click)="onCancel()"
+      cdkFocusInitial 
+      mat-flat-button 
+      color="warn"
+      >
+        Cancel
+      </button>
+      <button
+      [disabled]="form.invalid || formDisabled"
+      (click)="onSubmit()"
+      mat-flat-button
+      color="primary"
+      >
+        Update      
+      </button>
+    </div>
+  </ng-template>
+</form>

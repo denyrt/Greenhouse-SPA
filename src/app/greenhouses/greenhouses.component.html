@@ -1,0 +1,64 @@
+<div *ngIf="loading; else mainContent">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<ng-template #mainContent>
+  <div>
+    <div>
+      <button (click)="add()" color="primary" mat-flat-button style="margin: 15px;">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+      <mat-form-field style="padding: 14px; max-width: 100%; width: 100vh;">
+        <mat-label>Search</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="controllersCount">
+        <th mat-header-cell *matHeaderCellDef> Controllers Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.controllersCount}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell class="actions-header" *matHeaderCellDef ></th>
+        <td mat-cell *matCellDef="let row">
+          <button
+          (click)="remove(row.id)"
+          color="warn"
+          mat-flat-button
+          class="action-btn"
+          >
+            Delete
+          </button>
+          <button
+          (click)="update(row.id)"
+          color="accent"
+          mat-flat-button
+          class="action-btn"
+          >
+            Edit
+          </button>
+          <button
+          (click)="manageControllers(row.id)"
+          color="primary"
+          mat-flat-button
+          class="action-btn"
+          >
+            <mat-icon>speed</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</ng-template>

@@ -1,0 +1,154 @@
+<form [formGroup]="form">
+  <h1 mat-dialog-title>{{dialogTitle}}</h1>
+  <div *ngIf="loading; else createForm">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #createForm>
+    <div mat-dialog-content>
+      <div>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+          required
+          type="text"
+          matInput
+          placeholder="Some Greenhouse"
+          formControlName="name">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Report Interval (Seconds)</mat-label>
+          <input
+          required
+          range
+          [minValue]="30"
+          type="number"
+          matInput
+          placeholder="Seconds (200)"
+          formControlName="reportIntervalSeconds">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Сelsius To Start Aeration</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="celsiusToStartAeration">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Сelsius To Finish Aeration</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="celsiusToFinishAeration">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Сelsius To Start Heating</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="celsiusToStartHeating">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Сelsius To Finish Heating</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="celsiusToFinishHeating">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Bottom Edge To Alert</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="bottomEdgeToAlert">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Upper Edge To Alert</mat-label>
+          <input
+          required
+          type="number"
+          matInput
+          formControlName="upperEdgeToAlert">
+        </mat-form-field>
+      </div>
+    </div>  
+    <div *ngIf="form.touched && form.invalid" class="error">
+      <span *ngIf="f.name.touched && f.name.invalid">
+        Name is required.
+      </span>
+      <span *ngIf="f.reportIntervalSeconds.touched && f.reportIntervalSeconds.errors">
+        <span *ngIf="f.reportIntervalSeconds.errors.required">
+          Report Interval is required.
+        </span>
+        <span *ngIf="f.reportIntervalSeconds.errors.range">
+          Report Interval min value is {{f.reportIntervalSeconds.errors.data.minValue}}.
+        </span>
+      </span>
+      <span *ngIf="f.celsiusToStartAeration.touched && f.celsiusToStartAeration.errors">
+        <span *ngIf="f.celsiusToStartAeration.errors.required">
+          Start Aeration is required.
+        </span>
+      </span>
+      <span *ngIf="f.celsiusToFinishAeration.touched && f.celsiusToFinishAeration.errors">
+        <span *ngIf="f.celsiusToFinishAeration.errors.required">
+          Finish Aeration is required.
+        </span>
+      </span>
+      <span *ngIf="f.celsiusToStartHeating.touched && f.celsiusToStartHeating.errors">
+        <span *ngIf="f.celsiusToStartHeating.errors.required">
+          Start Heating is required.
+        </span>
+      </span>
+      <span *ngIf="f.celsiusToFinishHeating.touched && f.celsiusToFinishHeating.errors">
+        <span *ngIf="f.celsiusToFinishHeating.errors.required">
+          Finish Heating is required.
+        </span>
+      </span>
+      <span *ngIf="f.bottomEdgeToAlert.touched && f.bottomEdgeToAlert.errors">
+        <span *ngIf="f.bottomEdgeToAlert.errors.required">
+          Bottom edge is required.
+        </span>
+      </span>
+      <span *ngIf="f.upperEdgeToAlert.touched && f.upperEdgeToAlert.errors">
+        <span *ngIf="f.upperEdgeToAlert.errors.required">
+          Upper edge is required.
+        </span>
+      </span>
+    </div>
+    <mat-dialog-actions>
+      <button
+      (click)="cancel()"
+      cdkFocusInitial 
+      mat-flat-button 
+      color="warn"
+      >
+        {{cancelButtonLabel}}
+      </button>
+      <button
+      (click)="submit()"
+      cdkFocusInitial 
+      mat-flat-button
+      color="primary"
+      >
+        {{submitButtonLabel}}      
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+</form>

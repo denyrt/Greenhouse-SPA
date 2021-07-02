@@ -1,0 +1,120 @@
+<form [formGroup]="form">
+  <h1 mat-dialog-title>{{dialogTitle}}</h1>
+  <div *ngIf="loading; else mainContent">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #mainContent>
+    <div mat-dialog-content>
+      <div>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+          [value]="data.greenhouse.name"
+          readonly
+          matInput>
+        </mat-form-field>
+      </div>
+      <div>
+        <div class="list-block">
+          <mat-label>Current Lights Controllers</mat-label>
+          <mat-selection-list #addedLights [multiple]="false">
+            <mat-list-item (click)="removeLight(item)" *ngFor="let item of currentLights | keyvalue | mapValueFilter: true">
+              <span class="icon-text">
+                <mat-icon>remove</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+
+        <div class="list-block">
+          <mat-label>Available Lights Controllers</mat-label>
+          <mat-selection-list #lights [multiple]="false">
+            <mat-list-item (click)="addLight(item)" *ngFor="let item of currentLights | keyvalue | mapValueFilter: false">
+              <span class="icon-text">
+                <mat-icon>add</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+      </div>
+
+      <div>
+        <div class="list-block">
+          <mat-label>Current Temperature Controllers</mat-label>
+          <mat-selection-list #addedLights [multiple]="false">
+            <mat-list-item (click)="removeTemp(item)" *ngFor="let item of currentTemperatures | keyvalue | mapValueFilter:true">
+              <span class="icon-text">
+                <mat-icon>remove</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+
+        <div class="list-block">
+          <mat-label>Available Temperature Controllers</mat-label>
+          <mat-selection-list #lights [multiple]="false">
+            <mat-list-item (click)="addTemp(item)" *ngFor="let item of currentTemperatures | keyvalue | mapValueFilter:false">
+              <span class="icon-text">
+                <mat-icon>add</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+      </div>
+
+      <div>
+        <div class="list-block">
+          <mat-label>Current Wet Controllers</mat-label>
+          <mat-selection-list #addedLights [multiple]="false">
+            <mat-list-item
+            (click)="removeWet(item)"
+            *ngFor="let item of currentWets | keyvalue | mapValueFilter: true"
+            >
+              <span class="icon-text">
+                <mat-icon>remove</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+
+        <div class="list-block">
+          <mat-label>Available Wet Controllers</mat-label>
+          <mat-selection-list #lights [multiple]="false">
+            <mat-list-item 
+            (click)="addWet(item)"
+            *ngFor="let item of currentWets | keyvalue | mapValueFilter: false"
+            >
+              <span class="icon-text">
+                <mat-icon>add</mat-icon>
+                <span>{{item.key.name}}</span>          
+              </span>
+            </mat-list-item>
+          </mat-selection-list>
+        </div>
+      </div>
+    </div>  
+    <mat-dialog-actions>
+      <button
+      (click)="cancel()"
+      cdkFocusInitial 
+      mat-flat-button 
+      color="warn"
+      >
+        {{cancelButtonLabel}}
+      </button>
+      <button
+      [mat-dialog-close]="data"
+      cdkFocusInitial 
+      mat-flat-button
+      color="primary"
+      >
+        {{submitButtonLabel}}      
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+</form>

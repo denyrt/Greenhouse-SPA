@@ -1,0 +1,72 @@
+<div>
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <mat-label>Выберите теплицу</mat-label>
+        <mat-select      
+        required
+        formControlName="greenhouseId">
+          <mat-option *ngFor="let greenhouse of greenhouses" [value]="greenhouse.id">
+            {{greenhouse.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Начальная дата</mat-label>
+        <input
+        [readonly]="isLoading"
+        required
+        name="startDate"
+        type="date"
+        matInput
+        formControlName="startDate">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Конечная дата</mat-label>
+        <input
+        [readonly]="isLoading"
+        required
+        name="endDate"
+        type="date"
+        matInput
+        formControlName="endDate">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Время начальной даты</mat-label>
+        <input
+        [readonly]="isLoading"
+        required
+        name="startTime"
+        type="time"
+        matInput
+        formControlName="startTime">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Время конечной даты</mat-label>
+        <input
+        [readonly]="isLoading"
+        required
+        name="endTime"
+        type="time"
+        matInput
+        formControlName="endTime">
+      </mat-form-field>
+
+      <button
+      [disabled]="isLoading"
+      (click)="loadClick()"
+      color="primary"
+      mat-flat-button
+        >
+        Загрузить данные
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>          
+  </form>
+</div>

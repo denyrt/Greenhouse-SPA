@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <button (click)="add()" color="primary" mat-flat-button style="margin: 15px;">
+      <mat-icon>add</mat-icon>
+      Add
+    </button>
+    <mat-form-field style="padding: 14px; max-width: 100%; width: 100vh;">
+      <mat-label>Search</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Тип контроллера</mat-label>
+      <mat-select [(ngModel)]="selectedType" (valueChange)="typeChanged($event)">
+        <mat-option *ngFor="let type of controllersTypes" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div [ngSwitch]="selectedType">
+  <div *ngSwitchCase="'Temperature'">
+    <app-temperature-controllers-table
+    [updateDataViewEmitter]="updateDataViewEmmiter"
+    (deleteClickEM)="deleteTemperature($event)"
+    (updateClickEM)="updateTemperature($event)">
+    </app-temperature-controllers-table>
+  </div>
+
+  <div *ngSwitchCase="'Light'">
+    <app-lighting-controllers-table
+    [updateDataViewEmitter]="updateDataViewEmmiter"
+    (deleteClickEM)="deleteLight($event)"
+    (updateClickEM)="updateLight($event)">
+    </app-lighting-controllers-table>
+  </div>
+
+  <div *ngSwitchCase="'Wet'">
+    <app-wet-controllers-table
+    [updateDataViewEmitter]="updateDataViewEmmiter"
+    (deleteClickEM)="deleteWet($event)"
+    (updateClickEM)="updateWet($event)">
+    </app-wet-controllers-table>
+  </div>
+</div>
